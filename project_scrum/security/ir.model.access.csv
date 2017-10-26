@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+project_scrum_team_manager_access,project_scrum_team_manager_access,model_project_scrum_team,project.group_project_manager,1,1,1,1
+project_sprint_manager_access,project_sprint_manager_access,model_project_sprint,project.group_project_manager,1,1,1,1
+project_scrum_team_project_user_access,project_scrum_team_user_access,model_project_scrum_team,project.group_project_user,1,0,0,0
+project_sprint_project_user_access,project_sprint_user_access,model_project_sprint,project.group_project_user,1,0,0,0
+project_sprint_portal_user_access,project_sprint_user_access,model_project_sprint,base.group_portal,1,0,0,0
+project_scrum_team_portal_access,project_scrum_team_user_access,model_project_scrum_team,base.group_portal,1,0,0,0

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="project_scrum_team_form" model="ir.ui.view">
+            <field name="name">project_scrum_team_form</field>
+            <field name="model">project.scrum.team</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="sprint_ids" widget="many2many"/>
+                            <field name="project_ids" widget="many2many"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_scrum_team_tree" model="ir.ui.view">
+            <field name="name">project_scrum_team_tree</field>
+            <field name="model">project.scrum.team</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="project_sprint_form" model="ir.ui.view">
+            <field name="name">project_sprint_form</field>
+            <field name="model">project.sprint</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="view_tasks_action" type="object"
+                                    class="oe_stat_button" icon="fa-eye">
+                                <field name="task_count" string="View Tasks" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                            <group>
+                                <field name="is_previous_sprint"/>
+                                <field name="is_current_sprint"/>
+                            </group>
+                            <field name="scrum_team_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_task_form2" model="ir.ui.view">
+            <field name="name">view_task_form2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_deadline']" position="after">
+                    <field name="sprint_id"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']/button[@name='toggle_active']" position="before">
+                    <button name="assign_to_me" type="object" class="oe_stat_button" icon="fa-share-square-o" string="Assign To Me"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_tree2" model="ir.ui.view">
+            <field name="name">view_task_tree2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="sprint_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_search_form" model="ir.ui.view">
+            <field name="name">view_task_search_form_inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="sprint_id"/>
+                </xpath>
+
+                <xpath expr="//filter[@name='project']" position="after">
+                    <filter string="Sprint" name="sprint" context="{'group_by': 'sprint_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_kanban" model="ir.ui.view">
+            <field name="name">view_task_kanban</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='legend_done']" position="after">
+                    <field name="sprint_id"/>
+                </xpath>
+                <xpath expr="//div[@class='oe_kanban_bottom_right']/img" position="before">
+                    <t t-if="record.sprint_id.raw_value">
+                        <button class="pull-left btn btn-info btn-xs" type="object" name="go_to_sprint_action" style="margin-right: 5px;"><field name="sprint_id"/></button>
+                    </t>
+                </xpath>
+            </field>
+        </record>
+
+        <act_window id="project_sprint_action"
+                    name="Sprints"
+                    groups="project.group_project_manager"
+                    res_model="project.sprint"
+                    view_mode="tree,form"
+                    context="{}"
+                    view_type="form"/>
+
+        <menuitem name="Sprints" id="project_sprint_menuitem"
+                  parent="project.menu_project_management" sequence="5" action="project_sprint_action"/>
+
+        <act_window id="project_scrum_team_action"
+                    name="Scrum Teams"
+                    groups="project.group_project_manager"
+                    res_model="project.scrum.team"
+                    view_mode="tree,form"
+                    context="{}"
+                    view_type="form"/>
+
+        <menuitem name="Scrum Teams" id="project_scrum_team_menuitem"
+                  parent="project.menu_project_config" sequence="7" action="project_scrum_team_action"/>
+    </data>
+</openerp>
