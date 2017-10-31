@@ -29,4 +29,11 @@ class AccountAccountClassTemplate(models.Model):
 class AccountResPartner(models.Model):
     _inherit = "res.partner"
 
-    num_fiscal = fields.Char("Numéro fiscal")
+  #  num_fiscal = fields.Char("Numéro fiscal")
+
+class AccountSaleOrder(models.Model):
+    _inherit = "sale.order"
+
+
+
+    order_line = fields.One2many('sale.order.line', 'order_id', string='Order Lines', states={'cancel': [('readonly', True)]}, copy=True)

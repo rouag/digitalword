@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/digitalword.iml" filepath="$PROJECT_DIR$/.idea/digitalword.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../odoo-server/.idea/odoo-server.iml" filepath="$PROJECT_DIR$/../odoo-server/.idea/odoo-server.iml" />
     </modules>
   </component>
 </project>

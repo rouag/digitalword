@@ -17,6 +17,35 @@
             </field>
         </record>
 
+                  <record id="view_sale_order1_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.account</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+
+                <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                    <attribute name="editable">1</attribute>
+                     <attribute name="readonly">0</attribute>
+
+                </xpath>
+
+
+
+                <xpath expr="/form/sheet/notebook/page/field/form/group/group/field[@name='price_unit']" position="attributes">
+
+                   <attribute name="editable">1</attribute>
+                     <attribute name="readonly">0</attribute>
+
+                </xpath>
+
+
+
+
+
+                </data>
+            </field>
+        </record>
 
      <!--  <record id="action_account_account_template" model="ir.actions.act_window">
             <field name="name">Accounts Template</field>

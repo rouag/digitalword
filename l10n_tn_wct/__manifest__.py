@@ -20,9 +20,9 @@ comptables aux normes tunisiennes.""",
         'plan_comptable_general.xml',
         'tn_tax.xml',
         'tn_fiscal_templates.xml',
-
         'account_chart_template.yml',
-        'account_account_template_view.xml',
+
+
     ],
     'images': [
 		'images/wct_tn.png',
